@@ -70,9 +70,6 @@ builder
    .show();
 ```
 
-## Wiki
-For all information check [BottomSheet Wiki][wiki-url].
-
 ## License
 
     Copyright 2016 Michael Bely
