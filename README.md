@@ -23,8 +23,6 @@ Bottom sheets slide up from the bottom of the screen to reveal more content.
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="" height="100">](https://play.google.com/store/apps/details?id=org.michaelbel.bottomsheetdialog)
 [<img src="/screenshots/direct-apk-download.png" alt="" height="100">](https://github.com/michaelbel/BottomSheet/raw/master/app/release/bottomsheet-v1.2.3.apk)
 
-```
-
 ## Usage
 ```java
 BottomSheet.Builder builder = new BottomSheet.Builder(context);
