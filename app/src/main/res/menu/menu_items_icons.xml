@@ -1,13 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="@string/share"
-          android:icon="@drawable/ic_share"/>
+          android:icon="@drawable/ic_share"
+        android:id="@+id/menu_share"/>
 
     <item android:title="@string/upload"
-          android:icon="@drawable/ic_upload"/>
+          android:icon="@drawable/ic_upload"
+        android:id="@+id/menu_upload"/>
 
     <item android:title="@string/copy"
-          android:icon="@drawable/ic_copy"/>
+          android:icon="@drawable/ic_copy"
+        android:id="@+id/menu_copy"/>
 
     <item android:title="@string/print_this_page"
           android:icon="@drawable/ic_print"/>

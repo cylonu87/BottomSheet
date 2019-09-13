@@ -1,38 +1,3 @@
-[apk-url]:          https://github.com/michaelbel/BottomSheet/raw/master/app/release/bottomsheet-v1.2.3.apk
-[wiki-url]:         https://github.com/michaelbel/BottomSheet/wiki/usage
-[paypal-url]:       https://paypal.me/michaelbel
-[github-url]:       https://github.com/michaelbel/bottomsheet
-[licence-url]:      http://www.apache.org/licenses/LICENSE-2.0
-[bintray-url]:      https://bintray.com/michael-bel/maven/bottomsheet/_latestVersion
-[arsenal-url]:      https://android-arsenal.com/details/1/6623
-[mdguides-url]:     https://material.io/guidelines/components/bottom-sheets.html#
-[googleplay-url]:   https://play.google.com/store/apps/details?id=org.michaelbel.bottomsheetdialog
-[methodscount-url]: http://www.methodscount.com/?lib=org.michaelbel%3Abottomsheet%3A1.1.2
-[bsdf-url]:         https://developer.android.com/reference/android/support/design/widget/BottomSheetDialogFragment
-
-[ide-badge]:          https://img.shields.io/badge/Android_Studio-3.1.4-009688.svg
-[minsdk-badge]:       https://img.shields.io/badge/minSdkVersion-21-009688.svg
-[paypal-badge]:       https://img.shields.io/badge/Donate-Paypal-009688.svg
-[license-badge]:      https://img.shields.io/badge/License-Apache_v2.0-009688.svg
-[arsenal-badge]:      https://img.shields.io/badge/Android%20Arsenal-BottomSheet-009688.svg?style=flat
-[bintray-badge]:      https://api.bintray.com/packages/michael-bel/maven/bottomsheet/images/download.svg
-[platform-badge]:     https://img.shields.io/badge/Platform-Android-009688.svg
-[googleplay-badge]:   https://img.shields.io/badge/Google_Play-Demo-009688.svg
-[methodscount-badge]: https://img.shields.io/badge/Methods_and_Size-355_%20%7C%20_55KB-009688.svg
-
-<!------------------------------------------------------------------------------------------------------------------------------------->
-
-# BottomSheet
-[![Bintray][bintray-badge]][bintray-url]
-[![Platform][platform-badge]][github-url]
-[![MinSdk][minsdk-badge]][github-url]
-[![IDE][ide-badge]][github-url]
-[![License][license-badge]][licence-url]
-[![AndroidArsenal][arsenal-badge]][arsenal-url]
-[![GooglePlay][googleplay-badge]][googleplay-url]
-[![Methodscount][methodscount-badge]][methodscount-url]
-[![Paypal][paypal-badge]][paypal-url]
-
 BottomSheet dialogs library for Android with [material design concept][mdguides-url].
 Bottom sheets slide up from the bottom of the screen to reveal more content.
 
@@ -58,11 +23,6 @@ Bottom sheets slide up from the bottom of the screen to reveal more content.
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="" height="100">](https://play.google.com/store/apps/details?id=org.michaelbel.bottomsheetdialog)
 [<img src="/screenshots/direct-apk-download.png" alt="" height="100">](https://github.com/michaelbel/BottomSheet/raw/master/app/release/bottomsheet-v1.2.3.apk)
 
-## Download
-```gradle
-dependencies {
-    implementation 'org.michaelbel:bottomsheet:1.2.3'
-}
 ```
 
 ## Usage
@@ -70,7 +30,6 @@ dependencies {
 BottomSheet.Builder builder = new BottomSheet.Builder(context);
 builder
    .setTitle(CharSequence title)
-   .setItems(CharSequence[] items, Drawable[] icons, DialogInterface.OnClickListener listener)
    .setMenu(@MenuRes int menuResId, DialogInterface.OnClickListener listener)
    .setView(@LayoutRes int layoutResId)
    .setContentType(@BottomSheet.Type int type)
@@ -115,9 +74,6 @@ builder
 
 ## Wiki
 For all information check [BottomSheet Wiki][wiki-url].
-
-## Deprecated
-BottomSheet is deprecated. No more development will be taking place. Existing version will continue to function. Please, use [BottomSheetDialogFragment][bsdf-url] from Google instead. Thanks!
 
 ## License
 

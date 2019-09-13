@@ -24,27 +24,6 @@ import org.michaelbel.sample.R;
 
 public class MainFragment extends Fragment implements View.OnClickListener {
 
-    private int[] items = new int[] {
-        R.string.share,
-        R.string.upload,
-        R.string.copy,
-        R.string.print_this_page
-    };
-
-    /*private int[] items = new int[] {
-        R.string.preview,
-        R.string.share,
-        R.string.get_link,
-        R.string.make_copy
-    };*/
-
-    private int[] icons = new int[] {
-        R.drawable.ic_share,
-        R.drawable.ic_upload,
-        R.drawable.ic_copy,
-        R.drawable.ic_print
-    };
-
     private boolean theme;
     private MainActivity activity;
 
@@ -173,15 +152,12 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                 builder.setTitle(R.string.title_multiline_text);
                 builder.setTitleMultiline(true);
             }
-            if (iconsCheckBox.isChecked()) {
-                builder.setItems(items, icons, (dialogInterface, i) ->
-                    Toast.makeText(activity, items[i], Toast.LENGTH_SHORT).show()
-                );
-            } else {
-                builder.setItems(items, (dialogInterface, i) ->
-                    Toast.makeText(activity, items[i], Toast.LENGTH_SHORT).show()
-                );
-            }
+
+
+            builder.setMenu(iconsCheckBox.isChecked() ? R.menu.menu_items_icons: R.menu.menu_items, (dialogInterface, i) ->
+                    Toast.makeText(activity, i + "", Toast.LENGTH_SHORT).show()
+            );
+
             builder.setDividers(dividersCheckBox.isChecked());
             builder.setFullWidth(fullWidthCheckBox.isChecked());
             if (callbackCheckBox.isChecked()) {

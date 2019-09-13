@@ -35,7 +35,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import androidx.annotation.ArrayRes;
 import androidx.annotation.BoolRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -59,6 +58,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -83,8 +83,6 @@ import org.michaelbel.bottomsheetdialog.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
@@ -150,6 +148,7 @@ public class BottomSheet extends Dialog {
 
     private List<Drawable> ICONS = new ArrayList<>();
     private List<CharSequence> ITEMS = new ArrayList<>();
+    private List<Integer> IDS = new ArrayList<>();
 
     private CharSequence titleText;
     private ArrayList<BottomSheetItem> bottomsheetItems = new ArrayList<>();
@@ -304,7 +303,7 @@ public class BottomSheet extends Dialog {
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                            dismissWithButtonClick(position);
+                            dismissWithButtonClick(IDS.get(position));
                         }
                     });
 
@@ -322,8 +321,8 @@ public class BottomSheet extends Dialog {
                     gridView.setLayoutParams(params3);
                     gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            dismissWithButtonClick(i);
+                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                            dismissWithButtonClick(IDS.get(position));
                         }
                     });
 
@@ -365,7 +364,10 @@ public class BottomSheet extends Dialog {
 
         dismissed = false;
         cancelSheetAnimation();
-        containerView.measure(View.MeasureSpec.makeMeasureSpec(displaySize.x, View.MeasureSpec.AT_MOST), View.MeasureSpec.makeMeasureSpec(displaySize.y, View.MeasureSpec.AT_MOST));
+
+        //containerView.measure(View.MeasureSpec.makeMeasureSpec(displaySize.x, View.MeasureSpec.AT_MOST), View.MeasureSpec.makeMeasureSpec(displaySize.y, View.MeasureSpec.AT_MOST));
+        displaySize.x = getContext().getResources().getDisplayMetrics().widthPixels;
+        displaySize.y = getContext().getResources().getDisplayMetrics().heightPixels;
 
         backDrawable.setAlpha(0);
 
@@ -783,13 +785,13 @@ public class BottomSheet extends Dialog {
             if (containerView != null) {
                 if (!fullWidth) {
                     int widthSpec;
-                    widthSpec = MeasureSpec.makeMeasureSpec(isPortrait ? width + backgroundPaddingLeft * 2 : (int) Math.max(width * 0.8f, Math.min(Utils.dp(getContext(), 480), width)) + backgroundPaddingLeft * 2, MeasureSpec.EXACTLY);
+                    //widthSpec = MeasureSpec.makeMeasureSpec(isPortrait ? width + backgroundPaddingLeft * 2 : (int) Math.max(width * 0.8f, Math.min(Utils.dp(getContext(), 480), width)) + backgroundPaddingLeft * 2, MeasureSpec.EXACTLY);
 
-                    /*if (Utils.isTablet(getContext())) {
+                    if (Utils.isTablet(getContext())) {
                         widthSpec = MeasureSpec.makeMeasureSpec((int) (Math.min(displaySize.x, displaySize.y) * 0.8f) + backgroundPaddingLeft * 2, MeasureSpec.EXACTLY);
                     } else {
                         widthSpec = MeasureSpec.makeMeasureSpec(isPortrait ? width + backgroundPaddingLeft * 2 : (int) Math.max(width * 0.8f, Math.min(Utils.dp(getContext(), 480), width)) + backgroundPaddingLeft * 2, MeasureSpec.EXACTLY);
-                    }*/
+                    }
 
                     containerView.measure(widthSpec, MeasureSpec.makeMeasureSpec(height, MeasureSpec.AT_MOST));
                 } else {
@@ -1056,95 +1058,20 @@ public class BottomSheet extends Dialog {
             return this;
         }
 
-        public Builder setItems(@ArrayRes int itemsId, final OnClickListener listener) {
-            bottomSheet.ITEMS.addAll(Arrays.asList(context.getResources().getTextArray(itemsId)));
-            bottomSheet.onClickListener = listener;
-            return this;
-        }
-
-        public Builder setItems(@StringRes int[] items, final OnClickListener listener) {
-            for (int i : items) {
-                bottomSheet.ITEMS.add(context.getResources().getString(i));
-            }
-            bottomSheet.onClickListener = listener;
-            return this;
-        }
-
-        public Builder setItems(CharSequence[] items, final OnClickListener listener) {
-            bottomSheet.ITEMS.addAll(Arrays.asList(items));
-            bottomSheet.onClickListener = listener;
-            return this;
-        }
-
-        public Builder setItems(@ArrayRes int itemsId, int[] icons, final OnClickListener listener) {
-            bottomSheet.ITEMS.addAll(Arrays.asList(context.getResources().getTextArray(itemsId)));
-            for (int i: icons) {
-                bottomSheet.ICONS.add(ContextCompat.getDrawable(context, i));
-            }
-            bottomSheet.onClickListener = listener;
-            return this;
-        }
-
-        public Builder setItems(@ArrayRes int itemsId, Drawable[] icons, final OnClickListener listener) {
-            Collections.addAll(bottomSheet.ITEMS, context.getResources().getTextArray(itemsId));
-            Collections.addAll(bottomSheet.ICONS, icons);
-            bottomSheet.onClickListener = listener;
-            return this;
-        }
-
-        public Builder setItems(@StringRes int[] items, int[] icons, final OnClickListener listener) {
-            for (int i : items) {
-                bottomSheet.ITEMS.add(context.getResources().getString(i));
-            }
-            for (int j: icons) {
-                bottomSheet.ICONS.add(ContextCompat.getDrawable(context, j));
-            }
-            bottomSheet.onClickListener = listener;
-            return this;
-        }
-
-        public Builder setItems(@StringRes int[] items, Drawable[] icons, final OnClickListener listener) {
-            for (int i : items) {
-                bottomSheet.ITEMS.add(context.getResources().getString(i));
-            }
-            Collections.addAll(bottomSheet.ICONS, icons);
-            bottomSheet.onClickListener = listener;
-            return this;
-        }
-
-        public Builder setItems(@NonNull CharSequence[] items, int[] icons, final OnClickListener listener) {
-            bottomSheet.ITEMS.addAll(Arrays.asList(items));
-            for (int i: icons) {
-                bottomSheet.ICONS.add(ContextCompat.getDrawable(context, i));
-            }
-            bottomSheet.onClickListener = listener;
-            return this;
-        }
-
-        public Builder setItems(@NonNull CharSequence[] items, Drawable[] icons, final OnClickListener listener) {
-            bottomSheet.ITEMS.addAll(Arrays.asList(items));
-            Collections.addAll(bottomSheet.ICONS, icons);
-            bottomSheet.onClickListener = listener;
-            return this;
-        }
-
         public Builder setMenu(@MenuRes int menuResId, final OnClickListener listener) {
             BottomSheetMenu menu = new BottomSheetMenu(context);
             new MenuInflater(context).inflate(menuResId, menu);
-
-            for (int i = 0; i < menu.size(); i++) {
-                bottomSheet.ITEMS.add(menu.getItem(i).getTitle());
-                bottomSheet.ICONS.add(menu.getItem(i).getIcon());
-            }
-
-            bottomSheet.onClickListener = listener;
-            return this;
+            return setMenu(menu, listener);
         }
 
         public Builder setMenu(Menu menu, final OnClickListener listener) {
             for (int i = 0; i < menu.size(); i++) {
-                bottomSheet.ITEMS.add(menu.getItem(i).getTitle());
-                bottomSheet.ICONS.add(menu.getItem(i).getIcon());
+                MenuItem menuItem = menu.getItem(i);
+                if(menuItem.isVisible()) {
+                    bottomSheet.ITEMS.add(menu.getItem(i).getTitle());
+                    bottomSheet.ICONS.add(menu.getItem(i).getIcon());
+                    bottomSheet.IDS.add(menuItem.getItemId());
+                }
             }
 
             bottomSheet.onClickListener = listener;
