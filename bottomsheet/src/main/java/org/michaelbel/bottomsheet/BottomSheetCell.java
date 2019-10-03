@@ -17,14 +17,14 @@
 package org.michaelbel.bottomsheet;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.AppCompatImageView;
+
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -48,7 +48,7 @@ public class BottomSheetCell extends FrameLayout {
     private boolean divider;
 
     private TextView textView;
-    private ImageView iconView;
+    private AppCompatImageView iconView;
 
     public BottomSheetCell(Context context) {
         super(context);
@@ -61,8 +61,8 @@ public class BottomSheetCell extends FrameLayout {
 
         cellHeight = Utils.dp(context, 48);
 
-        iconView = new ImageView(context);
-        iconView.setScaleType(ImageView.ScaleType.CENTER);
+        iconView = new AppCompatImageView(context);
+        iconView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         LayoutParams params1 = new LayoutParams(Utils.dp(context, 24), Utils.dp(context, 24));
         params1.gravity = Gravity.START | Gravity.CENTER_VERTICAL;
@@ -88,7 +88,7 @@ public class BottomSheetCell extends FrameLayout {
         addView(textView);
     }
 
-    public BottomSheetCell setIcon(@DrawableRes int resId, @ColorInt int color) {
+    /*public BottomSheetCell setIcon(@DrawableRes int resId, @ColorInt int color) {
         if (resId != 0) {
             Drawable res = ContextCompat.getDrawable(getContext(), resId);
             if (res != null) {
@@ -112,17 +112,19 @@ public class BottomSheetCell extends FrameLayout {
         }
 
         return this;
-    }
+    }*/
 
     public BottomSheetCell setIcon(Drawable resId, @ColorInt int color) {
         if (resId != null) {
-            Drawable res = resId;
+            /*Drawable res = resId;
             if (res != null) {
                 res.clearColorFilter();
                 res.mutate().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
             }
+            iconView.setImageDrawable(res);*/
+            iconView.setImageDrawable(resId);
+            iconView.setSupportImageTintList(ColorStateList.valueOf(color));
 
-            iconView.setImageDrawable(res);
 
             LayoutParams params2 = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params2.gravity = Gravity.START | Gravity.CENTER_VERTICAL;

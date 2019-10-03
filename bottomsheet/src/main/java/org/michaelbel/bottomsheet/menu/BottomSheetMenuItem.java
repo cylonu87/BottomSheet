@@ -276,7 +276,7 @@ public class BottomSheetMenuItem implements MenuItem {
     }
 
     public MenuItem setVisible(boolean visible) {
-        mFlags = (mFlags & HIDDEN) | (visible ? 0 : HIDDEN);
+        mFlags = (mFlags & ~HIDDEN) | (visible ? 0 : HIDDEN);
         return this;
     }
 

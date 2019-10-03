@@ -17,12 +17,12 @@
 package org.michaelbel.bottomsheet;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.AppCompatImageView;
+
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -42,7 +42,7 @@ import android.widget.TextView;
 public class BottomSheetGrid extends LinearLayout {
 
     private TextView textView;
-    private ImageView iconView;
+    private AppCompatImageView iconView;
 
     public BottomSheetGrid(Context context) {
         super(context);
@@ -50,8 +50,8 @@ public class BottomSheetGrid extends LinearLayout {
         setOrientation(VERTICAL);
         setPadding(Utils.dp(getContext(), 24), Utils.dp(getContext(), 16), Utils.dp(getContext(), 24), Utils.dp(getContext(), 16));
 
-        iconView = new ImageView(context);
-        iconView.setScaleType(ImageView.ScaleType.CENTER);
+        iconView = new AppCompatImageView(context);
+        iconView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         LayoutParams params1 = new LayoutParams(Utils.dp(getContext(), 48), Utils.dp(getContext(), 48));
         params1.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
@@ -73,25 +73,9 @@ public class BottomSheetGrid extends LinearLayout {
         addView(textView);
     }
 
-    public BottomSheetGrid setIcon(@DrawableRes int resId, @ColorInt int color) {
-        Drawable icon = ContextCompat.getDrawable(getContext(), resId);
-        if (icon != null) {
-            icon.clearColorFilter();
-            icon.mutate().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
-        }
-
-        iconView.setImageDrawable(icon);
-        return this;
-    }
-
     public BottomSheetGrid setIcon(Drawable resId, @ColorInt int color) {
-        Drawable icon = resId;
-        if (icon != null) {
-            icon.clearColorFilter();
-            icon.mutate().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
-        }
-
-        iconView.setImageDrawable(icon);
+        iconView.setImageDrawable(resId);
+        iconView.setSupportImageTintList(ColorStateList.valueOf(color));
         return this;
     }
 
