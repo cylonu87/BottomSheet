@@ -1193,7 +1193,7 @@ public class BottomSheet extends Dialog {
             return this;
         }
 
-        public Builder setIconColorRes(@ColorInt int iconColorRes) {
+        public Builder setIconColorRes(@ColorRes int iconColorRes) {
             bottomSheet.iconColor = ContextCompat.getColor(context, iconColorRes);
             return this;
         }

@@ -145,6 +145,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         if (v == dialogButton) {
             BottomSheet.Builder builder = new BottomSheet.Builder(activity);
             builder.setDarkTheme(!theme);
+            builder.setContentType(BottomSheet.GRID);
             if (titleCheckBox.isChecked()) {
                 builder.setTitle(R.string.title_text);
             }

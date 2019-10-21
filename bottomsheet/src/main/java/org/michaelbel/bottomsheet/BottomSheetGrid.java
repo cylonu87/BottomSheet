@@ -48,7 +48,8 @@ public class BottomSheetGrid extends LinearLayout {
         super(context);
 
         setOrientation(VERTICAL);
-        setPadding(Utils.dp(getContext(), 24), Utils.dp(getContext(), 16), Utils.dp(getContext(), 24), Utils.dp(getContext(), 16));
+        //setPadding(Utils.dp(getContext(), 24), Utils.dp(getContext(), 16), Utils.dp(getContext(), 24), Utils.dp(getContext(), 16));
+        setPadding(Utils.dp(getContext(), 8), Utils.dp(getContext(), 16), Utils.dp(getContext(), 8), Utils.dp(getContext(), 16));
 
         iconView = new AppCompatImageView(context);
         iconView.setScaleType(ImageView.ScaleType.FIT_CENTER);
